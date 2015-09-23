@@ -457,8 +457,8 @@ void TuioClient::connect(bool lk) {
 	pthread_mutex_init(&cursorMutex,NULL);
 	pthread_mutex_init(&objectMutex,NULL);	
 #else
-	cursorMutex = CreateMutex(NULL,FALSE,"cursorMutex");
-	objectMutex = CreateMutex(NULL,FALSE,"objectMutex");
+	cursorMutex = CreateMutexA(NULL,FALSE,"cursorMutex");
+	objectMutex = CreateMutexA(NULL,FALSE,"objectMutex");
 #endif		
 		
 	if (socket==NULL) return;
