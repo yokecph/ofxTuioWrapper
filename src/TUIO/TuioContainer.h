@@ -303,7 +303,7 @@ namespace TUIO {
 		 * Returns the path of this TuioContainer.
 		 * @return	the path of this TuioContainer
 		 */
-		virtual std::list<TuioPoint> getPath() {
+		virtual std::list<TuioPoint> & getPath() {
 			return path;
 		};
 		
