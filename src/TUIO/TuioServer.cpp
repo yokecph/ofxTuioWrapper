@@ -255,11 +255,12 @@ void TuioServer::updateExternalTuioObject(TuioObject *tobj) {
 void TuioServer::removeTuioObject(TuioObject *tobj) {
 	if (tobj==NULL) return;
 	objectList.remove(tobj);
+	if (verbose)
+		std::cout << "del obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << ")" << std::endl;
+
 	delete tobj;
 	updateObject = true;
 	
-	if (verbose)
-		std::cout << "del obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << ")" << std::endl;
 }
 
 void TuioServer::removeExternalTuioObject(TuioObject *tobj) {
