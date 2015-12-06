@@ -36,34 +36,34 @@ void  ofxTuioServer::start(char * host, int port){
 }
 //add cursor, object
 TuioCursor * ofxTuioServer::addCursor(float _x, float _y){
-	if(verbose) cout<<"ofxTuioServer: TUIO Cursor added at x: "+ofToString(_x)+" y: "+ofToString(_y)<<endl;
+	if(verbose) ofLog() << "ofxTuioServer: TUIO Cursor added at x: " << _x << " y:  "<< _y;
 	return tuioServer->addTuioCursor(_x, _y);
 }
 
 TuioObject * ofxTuioServer::addObject(int _sid, float _x, float _y, float _a){
-	if(verbose) cout<<"ofxTuioServer: TUIO Object added at x: "+ofToString(_x)+" y: "+ofToString(_y)<<endl;
+	if(verbose) ofLog() << "ofxTuioServer: TUIO Object added at x: " << _x << " y: " << _y;
 	return tuioServer->addTuioObject(_sid, _x, _y, _a);
 }
 
 //update them
 void ofxTuioServer::updateCursor(TuioCursor * _tcur, float _nx, float _ny){
-	if(verbose) cout<<"ofxTuioServer: update TUIO Cursor " << _tcur->getCursorID() << " to x: "+ofToString(_nx)+" y: "+ofToString(_ny)<<endl;
+	if(verbose) ofLog() << "ofxTuioServer: update TUIO Cursor " << _tcur->getCursorID() << " to x: "<< _nx <<" y: "<< _ny;
 	tuioServer->updateTuioCursor(_tcur, _nx, _ny);
 }
 
 void ofxTuioServer::updateObject(TuioObject * _tobj, float _nx, float _ny, float _ang){
-	if(verbose) cout<<"ofxTuioServer: update TUIO object " << " to x: "+ofToString(_nx)+" y: "+ofToString(_ny)<<endl;
+	if(verbose) ofLog() << "ofxTuioServer: update TUIO object " << " to x: "<< _nx << " y: " << _ny << " z: " << _ang;
 	tuioServer->updateTuioObject(_tobj, _nx, _ny, _ang);
 }
 
 //remove them
 void ofxTuioServer::removeCursor(TuioCursor * _tcur){
-	if(verbose) cout<<"ofxTuioServer: removed TUIO Cursor " << _tcur->getCursorID()<<endl;
+	if(verbose) ofLog() << "ofxTuioServer: removed TUIO Cursor " << _tcur->getCursorID();
 	tuioServer->removeTuioCursor(_tcur);
 }
 
 void ofxTuioServer::removeObject(TuioObject * _tobj){
-	if(verbose) cout<<"ofxTuioServer: removed TUIO Object " <<endl;
+	if(verbose) ofLog() << "ofxTuioServer: removed TUIO Object ";
 	tuioServer->removeTuioObject(_tobj);
 }
 
@@ -74,12 +74,15 @@ TuioTime ofxTuioServer::getCurrentTime(){
 
 void ofxTuioServer::setVerbose(bool _b){
 	verbose = _b;
+	tuioServer->setVerbose(_b);
 }
 
 //send the OSC messages
 void ofxTuioServer::run() {
 	//this is weird, it should actually be something like....
 	tuioServer->stopUntouchedMovingCursors();
+	tuioServer->stopUntouchedMovingObjects();
+	tuioServer->removeUntouchedStoppedObjects();
 	tuioServer->commitFrame();
 	currentTime = TuioTime::getSessionTime();
 	tuioServer->initFrame(currentTime);

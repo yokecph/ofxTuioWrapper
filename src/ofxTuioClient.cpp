@@ -25,6 +25,7 @@
 ofxTuioClient::ofxTuioClient() {
     bIsConnected = false;	
 	bVerbose = false;
+	bFlip = false;
 }
 
 void ofxTuioClient::connect(int port){
@@ -103,7 +104,7 @@ void ofxTuioClient::addTuioObject(TuioObject *tobj) {
 	ofNotifyEvent(objectAdded, *tobj, this);
 	
 	if (bVerbose)
-		std::cout << "add obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << ") "<< tobj->getX() << " " << tobj->getY() << " " << tobj->getAngle() << std::endl;
+		ofLog() << "add obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << ") "<< tobj->getX() << " " << tobj->getY() << " " << tobj->getAngle();
 	
 }
 
@@ -116,8 +117,8 @@ void ofxTuioClient::updateTuioObject(TuioObject *tobj) {
 	ofNotifyEvent(objectUpdated, *tobj, this);
 	
 	if (bVerbose) 	
-		std::cout << "set obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << ") "<< tobj->getX() << " " << tobj->getY() << " " << tobj->getAngle() 
-		<< " " << tobj->getMotionSpeed() << " " << tobj->getRotationSpeed() << " " << tobj->getMotionAccel() << " " << tobj->getRotationAccel() << std::endl;
+		ofLog() << "set obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << ") "<< tobj->getX() << " " << tobj->getY() << " " << tobj->getAngle() 
+		<< " " << tobj->getMotionSpeed() << " " << tobj->getRotationSpeed() << " " << tobj->getMotionAccel() << " " << tobj->getRotationAccel();
 	
 }
 
@@ -130,7 +131,7 @@ void ofxTuioClient::removeTuioObject(TuioObject *tobj) {
 	ofNotifyEvent(objectRemoved, *tobj, this);
 	
 	if (bVerbose)
-		std::cout << "del obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << ")" << std::endl;
+		ofLog() << "del obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << ")";
 }
 
 void ofxTuioClient::addTuioCursor(TuioCursor *tcur) {
@@ -147,7 +148,7 @@ void ofxTuioClient::addTuioCursor(TuioCursor *tcur) {
 	ofNotifyEvent(ofEvents().touchDown, touch, this);
 	
 	if (bVerbose) 
-		std::cout << "add cur " << tcur->getCursorID() << " (" <<  tcur->getSessionID() << ") " << tcur->getX() << " " << tcur->getY() << std::endl;
+		ofLog() << "add cur " << tcur->getCursorID() << " (" <<  tcur->getSessionID() << ") " << tcur->getX() << " " << tcur->getY();
 	
 }
 
@@ -166,8 +167,8 @@ void ofxTuioClient::updateTuioCursor(TuioCursor *tcur) {
 	ofNotifyEvent(ofEvents().touchMoved, touch, this);
 	
 	if (bVerbose) 	
-		std::cout << "set cur " << tcur->getCursorID() << " (" <<  tcur->getSessionID() << ") " << tcur->getX() << " " << tcur->getY() 
-		<< " " << tcur->getMotionSpeed() << " " << tcur->getMotionAccel() << " " << std::endl;
+		ofLog() << "set cur " << tcur->getCursorID() << " (" <<  tcur->getSessionID() << ") " << tcur->getX() << " " << tcur->getY() 
+		<< " " << tcur->getMotionSpeed() << " " << tcur->getMotionAccel() << " ";
 }
 
 void ofxTuioClient::removeTuioCursor(TuioCursor *tcur) {
@@ -185,7 +186,7 @@ void ofxTuioClient::removeTuioCursor(TuioCursor *tcur) {
 	ofNotifyEvent(ofEvents().touchUp, touch, this);
 	
 	if (bVerbose)
-		std::cout << "del cur " << tcur->getCursorID() << " (" <<  tcur->getSessionID() << ")" << std::endl;
+		ofLog() << "del cur " << tcur->getCursorID() << " (" <<  tcur->getSessionID() << ")";
 }
 
 void ofxTuioClient::refresh(TuioTime frameTime) {
