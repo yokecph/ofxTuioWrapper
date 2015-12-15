@@ -99,10 +99,9 @@ void ofxTuioServer::run() {
 
 //draw them for debug purposes
 void ofxTuioServer::drawCursors() {
-	char id[3];
 	// draw the cursors
 	std::list<TuioCursor*> cursorList = tuioServer->getTuioCursors();
-	for (std::list<TuioCursor*>::iterator tuioCursor = cursorList.begin(); tuioCursor!=cursorList.end(); tuioCursor++) {
+	for (std::list<TuioCursor*>::iterator tuioCursor = cursorList.begin(); tuioCursor!=cursorList.end(); ++tuioCursor) {
 		TuioCursor * tcur = (*tuioCursor);
 		std::list<TuioPoint> path = tcur->getPath();
 		if (path.size()>0) {
@@ -111,7 +110,7 @@ void ofxTuioServer::drawCursors() {
 			glBegin(GL_LINES);
 			glColor3f(0.0, 0.0, 1.0);
 
-			for (std::list<TuioPoint>::iterator point = path.begin(); point!=path.end(); point++) {
+			for (std::list<TuioPoint>::iterator point = path.begin(); point!=path.end(); ++point) {
 				glVertex3f(last_point.getX()*ofGetWidth(), last_point.getY()*ofGetHeight(), 0.0f);
 				glVertex3f(point->getX()*ofGetWidth(), point->getY()*ofGetHeight(), 0.0f);
 				last_point.update(point->getX(),point->getY());
@@ -129,7 +128,7 @@ void ofxTuioServer::drawObjects(){
     std::list<TuioObject*> objectList = tuioServer->getTuioObjects();
 	list<TuioObject*>::iterator tobj;
 
-	for (tobj=objectList.begin(); tobj != objectList.end(); tobj++) {
+	for (tobj=objectList.begin(); tobj != objectList.end(); ++tobj) {
 		TuioObject *obj = (*tobj);
 		glColor3f(1.0,0.0,0.0);
 		glPushMatrix();

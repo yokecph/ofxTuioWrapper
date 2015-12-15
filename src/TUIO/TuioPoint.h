@@ -101,7 +101,7 @@ namespace TUIO {
 		/**
 		 * The destructor is doing nothing in particular. 
 		 */
-		~TuioPoint(){};
+		virtual ~TuioPoint(){};
 		
 		/**
 		 * Takes a TuioPoint argument and updates its coordinate attributes 

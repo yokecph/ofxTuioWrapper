@@ -22,7 +22,6 @@
 #ifndef INCLUDED_TUIOCURSOR_H
 #define INCLUDED_TUIOCURSOR_H
 
-#include <math.h>
 #include "TuioContainer.h"
 
 namespace TUIO {
