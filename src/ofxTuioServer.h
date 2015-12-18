@@ -27,9 +27,6 @@
 #include "TuioServer.h"
 #include "TuioCursor.h"
 
-#include <list>
-#include <math.h>
-
 using namespace TUIO;
 
 class ofxTuioServer {

@@ -50,12 +50,13 @@ void ofxTuioClient::setVerbose(bool b){
 	bVerbose = b;
 }
 
-void ofxTuioClient::drawCursors(){
+void ofxTuioClient::drawCursors() 
+{
 	ofPushStyle();
     std::list<TuioCursor*> cursorList = client->getTuioCursors();
 	std::list<TuioCursor*>::iterator tit;
 	client->lockCursorList();
-	for (tit=cursorList.begin(); tit != cursorList.end(); tit++) {
+	for (tit=cursorList.begin(); tit != cursorList.end(); ++tit) {
 		TuioCursor * cur = (*tit);
 		//if(tcur!=0){
 			//TuioCursor cur = *tcur;
@@ -71,12 +72,13 @@ void ofxTuioClient::drawCursors(){
 	ofPopStyle();
 }
 
-void ofxTuioClient::drawObjects(){
+void ofxTuioClient::drawObjects() 
+{
 	ofPushStyle();
     std::list<TuioObject*> objectList = client->getTuioObjects();
 	list<TuioObject*>::iterator tobj;
 	client->lockObjectList();
-	for (tobj=objectList.begin(); tobj != objectList.end(); tobj++) {
+	for (tobj=objectList.begin(); tobj != objectList.end(); ++tobj) {
 		TuioObject *obj = (*tobj);
 		glColor3f(1.0,0.0,0.0);
 		glPushMatrix();

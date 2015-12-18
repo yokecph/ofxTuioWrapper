@@ -22,53 +22,59 @@
 
 #include "ofxTuioServer.h"
 
-ofxTuioServer::ofxTuioServer() {
+ofxTuioServer::ofxTuioServer(): tuioServer(nullptr), verbose(false)
+{
 
 }
 
 //start Server (host, port);
 void  ofxTuioServer::start(char * host, int port){
 	verbose = false;
-//	if ((strcmp(host,"default")==0) && (port==0)) tuioServer = new TuioServer(new UdpSender);
-//	else tuioServer = new TuioServer(new UdpSender(host, port));
 	tuioServer = new TuioServer(host, port);
 	currentTime = TuioTime::getSessionTime();
 }
 //add cursor, object
-TuioCursor * ofxTuioServer::addCursor(float _x, float _y){
+TuioCursor * ofxTuioServer::addCursor(float _x, float _y)
+{
 	if(verbose) ofLog() << "ofxTuioServer: TUIO Cursor added at x: " << _x << " y:  "<< _y;
 	return tuioServer->addTuioCursor(_x, _y);
 }
 
-TuioObject * ofxTuioServer::addObject(int _sid, float _x, float _y, float _a){
+TuioObject * ofxTuioServer::addObject(int _sid, float _x, float _y, float _a)
+{
 	if(verbose) ofLog() << "ofxTuioServer: TUIO Object added at x: " << _x << " y: " << _y;
 	return tuioServer->addTuioObject(_sid, _x, _y, _a);
 }
 
 //update them
-void ofxTuioServer::updateCursor(TuioCursor * _tcur, float _nx, float _ny){
+void ofxTuioServer::updateCursor(TuioCursor * _tcur, float _nx, float _ny)
+{
 	if(verbose) ofLog() << "ofxTuioServer: update TUIO Cursor " << _tcur->getCursorID() << " to x: "<< _nx <<" y: "<< _ny;
 	tuioServer->updateTuioCursor(_tcur, _nx, _ny);
 }
 
-void ofxTuioServer::updateObject(TuioObject * _tobj, float _nx, float _ny, float _ang){
+void ofxTuioServer::updateObject(TuioObject * _tobj, float _nx, float _ny, float _ang)
+{
 	if(verbose) ofLog() << "ofxTuioServer: update TUIO object " << " to x: "<< _nx << " y: " << _ny << " z: " << _ang;
 	tuioServer->updateTuioObject(_tobj, _nx, _ny, _ang);
 }
 
 //remove them
-void ofxTuioServer::removeCursor(TuioCursor * _tcur){
+void ofxTuioServer::removeCursor(TuioCursor * _tcur)
+{
 	if(verbose) ofLog() << "ofxTuioServer: removed TUIO Cursor " << _tcur->getCursorID();
 	tuioServer->removeTuioCursor(_tcur);
 }
 
-void ofxTuioServer::removeObject(TuioObject * _tobj){
+void ofxTuioServer::removeObject(TuioObject * _tobj)
+{
 	if(verbose) ofLog() << "ofxTuioServer: removed TUIO Object ";
 	tuioServer->removeTuioObject(_tobj);
 }
 
 //Getters
-TuioTime ofxTuioServer::getCurrentTime(){
+TuioTime ofxTuioServer::getCurrentTime()
+{
 	return tuioServer->getFrameTime();
 }
 
@@ -98,7 +104,8 @@ void ofxTuioServer::run() {
 }
 
 //draw them for debug purposes
-void ofxTuioServer::drawCursors() {
+void ofxTuioServer::drawCursors()
+{
 	// draw the cursors
 	std::list<TuioCursor*> cursorList = tuioServer->getTuioCursors();
 	for (std::list<TuioCursor*>::iterator tuioCursor = cursorList.begin(); tuioCursor!=cursorList.end(); ++tuioCursor) {
@@ -124,7 +131,8 @@ void ofxTuioServer::drawCursors() {
 	}
 }
 
-void ofxTuioServer::drawObjects(){
+void ofxTuioServer::drawObjects()
+{
     std::list<TuioObject*> objectList = tuioServer->getTuioObjects();
 	list<TuioObject*>::iterator tobj;
 
