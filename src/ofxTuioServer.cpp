@@ -85,22 +85,9 @@ void ofxTuioServer::setVerbose(bool _b){
 
 //send the OSC messages
 void ofxTuioServer::run() {
-	//this is weird, it should actually be something like....
-	tuioServer->stopUntouchedMovingCursors();
-	tuioServer->stopUntouchedMovingObjects();
-	tuioServer->removeUntouchedStoppedObjects();
 	tuioServer->commitFrame();
 	currentTime = TuioTime::getSessionTime();
 	tuioServer->initFrame(currentTime);
-	//...this:
-	/*
-	currentTime = TuioTime::getSessionTime();
-	tuioServer->initFrame(currentTime);
-	tuioServer->stopUntouchedMovingCursors();
-	tuioServer->commitFrame();
-	*/
-
-	//propably due to the order of which OF handles mouse and keyboard events
 }
 
 //draw them for debug purposes
